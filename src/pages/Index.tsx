@@ -118,43 +118,55 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-blue-500 to-purple-600 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl"></div>
-      <div className="absolute top-20 left-10 w-32 h-32 bg-white/20 rounded-full blur-xl"></div>
-      <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-300/20 rounded-full blur-xl"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-300/10 rounded-full blur-2xl"></div>
+      {/* Enhanced Background decoration with animations */}
+      <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl"></div>
+      <div className="absolute top-20 left-10 w-32 h-32 bg-white/20 rounded-full blur-xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-300/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-300/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+      
+      {/* Floating particles */}
+      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/30 rounded-full animate-bounce delay-200"></div>
+      <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-yellow-300/40 rounded-full animate-bounce delay-700"></div>
+      <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-white/40 rounded-full animate-bounce delay-1000"></div>
       
       <div className="relative z-10 container mx-auto px-4 py-8 max-w-6xl">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
-            Weather<span className="text-yellow-300">Cast</span>
+        {/* Enhanced Header with animations */}
+        <div className="text-center mb-12 animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight transform hover:scale-105 transition-transform duration-300">
+            Weather<span className="text-yellow-300 animate-pulse">Cast</span>
           </h1>
-          <p className="text-white/80 text-lg md:text-xl">
-            Get real-time weather updates for any city worldwide
+          <p className="text-white/90 text-xl md:text-2xl font-light leading-relaxed max-w-2xl mx-auto">
+            Experience real-time weather updates with stunning visuals for cities worldwide
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-yellow-300 to-orange-400 mx-auto mt-6 rounded-full animate-pulse"></div>
         </div>
 
-        {/* Controls */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8 items-center justify-center">
-          <SearchBar onSearch={handleSearch} loading={loading} />
-          <div className="flex gap-3">
-            <GeolocationButton onClick={handleGeolocation} loading={loading} />
-            <TemperatureToggle unit={unit} onToggle={toggleUnit} />
+        {/* Enhanced Controls with stagger animation */}
+        <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-center animate-fade-in delay-200">
+          <div className="transform hover:scale-105 transition-all duration-300">
+            <SearchBar onSearch={handleSearch} loading={loading} />
+          </div>
+          <div className="flex gap-4">
+            <div className="transform hover:scale-105 transition-all duration-300">
+              <GeolocationButton onClick={handleGeolocation} loading={loading} />
+            </div>
+            <div className="transform hover:scale-105 transition-all duration-300">
+              <TemperatureToggle unit={unit} onToggle={toggleUnit} />
+            </div>
           </div>
         </div>
 
-        {/* Weather Display */}
+        {/* Enhanced Weather Display with slide-in animation */}
         {weatherData && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8 animate-fade-in delay-300">
+            <div className="lg:col-span-2 transform hover:scale-[1.02] transition-all duration-500">
               <WeatherDisplay 
                 data={weatherData} 
                 unit={unit}
                 convertTemperature={convertTemperature}
               />
             </div>
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-1 transform hover:scale-[1.02] transition-all duration-500 delay-100">
               <ForecastDisplay 
                 data={forecastData} 
                 unit={unit}
@@ -164,11 +176,19 @@ const Index = () => {
           </div>
         )}
 
-        {/* Loading state */}
+        {/* Enhanced Loading state */}
         {loading && !weatherData && (
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-            <p className="text-white mt-4">Fetching weather data...</p>
+          <div className="text-center animate-fade-in">
+            <div className="relative inline-flex items-center justify-center">
+              <div className="w-16 h-16 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+              <div className="absolute w-12 h-12 border-4 border-transparent border-t-yellow-300 rounded-full animate-spin animate-reverse"></div>
+            </div>
+            <p className="text-white text-xl mt-6 font-medium animate-pulse">Fetching weather data...</p>
+            <div className="flex justify-center space-x-1 mt-4">
+              <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce delay-100"></div>
+              <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce delay-200"></div>
+            </div>
           </div>
         )}
       </div>
